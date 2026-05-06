@@ -1,6 +1,18 @@
 /*  import google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
+:root{
+    --pp-bg: #0b0f17;
+    --pp-surface: #111827;
+    --pp-surface-2: #0f172a;
+    --pp-text: #e5e7eb;
+    --pp-muted: #9ca3af;
+    --pp-brand: crimson;
+    --pp-border: rgba(255,255,255,0.08);
+    --pp-radius: 12px;
+    --pp-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -9,6 +21,33 @@
 }
 html{
     scroll-behavior: smooth;
+}
+body{
+    background: var(--pp-bg);
+    color: var(--pp-text);
+}
+
+.skip-link{
+    position: absolute;
+    left: -999px;
+    top: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--pp-surface);
+    color: var(--pp-text);
+    border: 1px solid var(--pp-border);
+    z-index: 10000;
+}
+.skip-link:focus{
+    left: 10px;
+}
+.bullet-list{
+    margin-top: 14px;
+    padding-left: 18px;
+    color: var(--pp-muted);
+}
+.bullet-list li{
+    margin: 10px 0;
 }
 
 /* custom scroll bar */
@@ -63,7 +102,7 @@ section .title::before{
     left: 50%;
     width: 180px;
     height: 3px;
-    background: #111;
+    background: var(--pp-border);
     transform: translateX(-50%);
 }
 section .title::after{
@@ -73,7 +112,7 @@ section .title::after{
     font-size: 20px;
     color: crimson;
     padding: 0 5px;
-    background: #fff;
+    background: var(--pp-bg);
     transform: translateX(-50%);
 }
 
@@ -408,16 +447,31 @@ section .title::after{
 .teams .title::after{
     content: "who with me";
 }
+.teams .carousel{
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 4px 0;
+}
+.teams .carousel::-webkit-scrollbar{
+    height: 10px;
+}
 .teams .carousel .card{
-    background: #222;
-    border-radius: 6px;
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    background: var(--pp-surface);
+    border: 1px solid var(--pp-border);
+    border-radius: var(--pp-radius);
     padding: 25px 35px;
     text-align: center;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 .teams .carousel .card:hover{
-    background: crimson;
+    background: var(--pp-brand);
+    transform: translateY(-5px);
 }
 .teams .carousel .card .box{
     display: flex;
@@ -439,130 +493,54 @@ section .title::after{
     width: 150px;
     object-fit: cover;
     border-radius: 50%;
-    border: 5px solid crimson;
+    border: 5px solid var(--pp-brand);
     transition: all 0.3s ease;
 }
 .teams .carousel .card:hover img{
     border-color: #fff;
 }
-.owl-dots{
-    text-align: center;
-    margin-top: 20px;
+.teams .team-role{
+    display: inline-block;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    letter-spacing: 0.2px;
 }
-.owl-dot{
-    height: 13px;
-    width: 13px;
-    margin: 0 5px;
-    outline: none!important;
-    border-radius: 50%;
-    border: 2px solid crimson!important;
-    transition: all 0.3s ease;
+.teams .team-desc{
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.82);
 }
-.owl-dot.active{
-    width: 35px;
-    border-radius: 14px;
+.teams .carousel-nav{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
 }
-.owl-dot.active,
-.owl-dot:hover{
-    background: crimson!important;
+.teams .carousel-btn{
+    appearance: none;
+    border: 2px solid crimson;
+    background: transparent;
+    color: crimson;
+    height: 40px;
+    width: 48px;
+    border-radius: 10px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-
-
-/* Teams section styling */
-.teams {
-    padding: 50px 0;
-    background: #f4f4f4;
-}
-
-    .teams .title {
-        text-align: center;
-        font-size: 32px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 30px;
-    }
-
-    .teams .carousel {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        justify-items: center;
-    }
-
-    .teams .card {
-        background: #222;
-        border-radius: 6px;
-        padding: 25px 35px;
-        text-align: center;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 300px; /* Optional: Limit the width */
-    }
-
-        .teams .card:hover {
-            background: crimson;
-            transform: translateY(-5px); /* Subtle hover effect */
-        }
-
-        .teams .card .box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .teams .card:hover .box {
-            transform: scale(1.05); /* Slight scale-up on hover */
-        }
-
-        .teams .card .text {
-            font-size: 25px;
-            font-weight: 500;
-            margin: 10px 0 7px 0;
-            color: #fff; /* Ensure text is readable on hover */
-        }
-
-        .teams .card img {
-            height: 150px;
-            width: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid crimson;
-            transition: all 0.3s ease;
-        }
-
-        .teams .card:hover img {
-            border-color: #fff; /* Change border color on hover */
-        }
-
-        .teams .card p {
-            font-size: 14px;
-            color: #fff;
-            margin-top: 10px;
-            line-height: 1.6;
-        }
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .teams .card .text {
-        font-size: 20px;
-    }
-
-    .teams .card img {
-        height: 130px;
-        width: 130px;
-    }
-
-    .teams .carousel {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust grid for mobile */
-    }
+.teams .carousel-btn:hover{
+    background: crimson;
+    color: #fff;
 }
 /*Project*/
 .projects {
     padding: 50px 20px;
-    background-color: #f9f9f9;
     text-align: center;
 }
 
@@ -574,7 +552,6 @@ section .title::after{
     .projects .title {
         font-size: 2.5rem;
         font-weight: 600;
-        color: #333;
         margin-bottom: 30px;
     }
 
@@ -586,17 +563,18 @@ section .title::after{
 }
 
 .card {
-    background: #222; /* Default background color */
-    border-radius: 8px;
-    color: #fff; /* Text color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: var(--pp-surface);
+    border: 1px solid var(--pp-border);
+    border-radius: var(--pp-radius);
+    color: var(--pp-text);
+    box-shadow: var(--pp-shadow);
     overflow: hidden;
     transition: transform 0.3s, background 0.3s;
 }
 
     .card:hover {
         transform: translateY(-10px);
-        background: crimson; /* Hover background color */
+        background: var(--pp-brand);
     }
 
     .card .content {
@@ -610,17 +588,16 @@ section .title::after{
         margin-bottom: 10px;
     }
 
-    .card p {
-        font-size: 1rem;
-        color: #ccc; /* Lighter text color */
-        line-height: 1.5;
-    }
+     .card p {
+         font-size: 1rem;
+         color: rgba(255,255,255,0.82);
+         line-height: 1.5;
+     }
 
 /*Project End*/
 /*Tools and Technology*/
 .expertise {
     padding: 50px 20px;
-    background-color: #f0f0f0;
     text-align: center;
 }
 
@@ -632,7 +609,6 @@ section .title::after{
     .expertise .title {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #333;
         margin-bottom: 30px;
     }
 
@@ -642,55 +618,24 @@ section .title::after{
     gap: 20px;
 }
 
-.card {
-    background-color: #222;
-    color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, background 0.3s;
-}
-
     .card h3 {
         font-size: 1.5rem;
         margin-bottom: 10px;
-        color: crimson;
+        color: #fff;
     }
 
     .card ul {
         list-style: none;
         padding: 0;
         margin: 0;
+        color: rgba(255,255,255,0.82);
     }
 
         .card ul li {
             font-size: 1rem;
             line-height: 1.8;
         }
-
-    .card:hover {
-        transform: translateY(-10px);
-        background-color: crimson;
-        color: #fff;
-    }
-
-        .card:hover h3 {
-            color: #222;
-        }
 /*Client Feadback*/
-.client-feedback {
-    background-color: #f9f9f9;
-    padding: 50px 20px;
-}
-
-    .client-feedback .title {
-        text-align: center;
-        font-size: 32px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 30px;
-    }
-
 .feedback-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -700,31 +645,32 @@ section .title::after{
 }
 
 .feedback-card {
-    background-color: #4CAF50; /* Card background color */
-    color: #ffffff; /* Text color */
-    border-radius: 8px;
+    background: var(--pp-surface);
+    border: 1px solid var(--pp-border);
+    color: var(--pp-text);
+    border-radius: var(--pp-radius);
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--pp-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .feedback-card h3 {
         font-size: 20px;
         font-weight: 600;
-        color: #ffffff; /* Heading text color */
+        color: var(--pp-text);
         margin-bottom: 10px;
     }
 
     .feedback-card p {
         font-size: 16px;
-        color: #ffffff; /* Paragraph text color */
+        color: rgba(255,255,255,0.82);
         line-height: 1.5;
     }
 
     .feedback-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        background-color: #388E3C; /* Hover background color */
+        background: var(--pp-surface-2);
     }
 
 /* contact section styling */
